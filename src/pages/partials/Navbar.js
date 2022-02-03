@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './Navbar.css';
 
 import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem, NavDropdown } from 'react-bootstrap';
 
 class Navbars extends Component {
     render() {
         return (
-            <Navbar bg="dark" expand="lg" variant='dark'>
+            <Navbar bg="dark" expand="lg" variant='dark' className='navbar'>
                 <Container>
                     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
