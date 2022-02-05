@@ -6,6 +6,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home'
 
+// === Ini untuk percobaan connect form ke API === 
+  import RegisterTest from './pages/RegisterTest'
+// ===============================================
+/**
+ * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
+ * Format file nya harap mengikuti yang sudah ada ya :D
+ */
+
 import Navbars from './pages/partials/Navbar'
 
 function App() {
@@ -13,7 +21,11 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/navbar-test" element={<Navbars />}></Route>
+
+        {/* === Keperluan test API === */}
+          <Route exact path="/navbar-test" element={<Navbars />}></Route>
+          <Route exact path="/register-test" element={<RegisterTest />} />
+        {/* ========================== */}
       </Routes>
     </Router>
     // <div className="App">
