@@ -5,7 +5,7 @@ import './RegisterTest.css'
 
 import Navbar from './partials/Navbar'
 
-export default class RegisterTest extends React.Component {
+export default class LoginTest extends React.Component {
     constructor() {
         super();
         this.state = {
