@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home'
 //Untuk router loginPage
-import loginPage from './pages/loginPage'
+import LoginPage from './pages/loginPage'
+
 
 // === Ini untuk percobaan connect form ke API === 
   import RegisterTest from './pages/RegisterTest'
@@ -28,7 +29,7 @@ function App() {
           <Route exact path="/navbar-test" element={<Navbars />}></Route>
           <Route exact path="/register-test" element={<RegisterTest />} />
         {/* ========================== */}
-        <Route exact path="/login" element={<loginPage />} />
+        <Route exact path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
     // <div className="App">
