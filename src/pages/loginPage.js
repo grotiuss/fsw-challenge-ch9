@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 import Navbar from './partials/Navbar'
 
 
 
 
-function loginPage() {
+class LoginPage extends Component{
+    render(){
   return (
     <>
 <Navbar />
+<Container>
+<Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
+    <h1>SIGN IN</h1>                       
+</Col>
 <Form inline>
   <FormGroup>
     <Label
@@ -42,13 +47,15 @@ function loginPage() {
   </FormGroup>
   {' '}
   <Button>
-    Login
+    Sign In
   </Button>
 </Form>
+</Container>
 
 </>
   );
 }
+}
 
 
-export default loginPage; 
+export default LoginPage; 
