@@ -10,8 +10,7 @@ function Home() {
     let styleObj = { fontSize: '80px' }
   return (
     <>
-        <Navbar />
-        <Container id='header' className='mt-5' fluid>
+        <Container id='header'fluid>
             <Container className='Container pt-5 pt-md-2 pt-lg-5'>
                 <Row className="justify-content-center mt-xxl-3">
                     <Col xs={12} sm={12} md={8} className="text-center">

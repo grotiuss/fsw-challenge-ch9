@@ -8,7 +8,7 @@ import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem,
 class Navbars extends Component {
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -26,7 +26,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
-            <PrivateRoute exact path="/" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
 
