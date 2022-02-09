@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from './pages/Home'
-
-//Untuk router loginPage
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+
 // === Ini untuk percobaan connect form ke API === 
   import RegisterTest from './pages/RegisterTest'
 // ===============================================
@@ -27,12 +27,14 @@ function App() {
         <Router>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
+            <Route  path="/login" component={LoginPage} />
+            <Route exact path="/register" component={RegisterPage} />
 
           {/* === Keperluan test API === */}
             <Route  path="/navbar-test" component={Navbars} />
             <Route  path="/register-test" component={RegisterTest} />
           {/* ========================== */}
-          <Route  path="/login" component={LoginPage} />
+          
           </Switch>
         </Router>
       </AuthProvider>
