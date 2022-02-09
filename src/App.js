@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './pages/Home'
 
 //Untuk router loginPage
-import LoginPage from './pages/loginPage'
+import LoginPage from './pages/LoginPage'
 // === Ini untuk percobaan connect form ke API === 
   import RegisterTest from './pages/RegisterTest'
 // ===============================================
