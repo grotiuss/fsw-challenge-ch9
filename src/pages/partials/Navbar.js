@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './Navbar.css';
+import app from '../../auth/firebase'
 
 import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem, NavDropdown } from 'react-bootstrap';
 
@@ -24,7 +25,9 @@ class Navbars extends Component {
                         </NavDropdown>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#login">Login</Nav.Link>
+                            <Nav.Link onClick={() => app.auth().signOut()}>Sign out</Nav.Link>
+
+                            <Nav.Link href="/login">Login</Nav.Link>
                             <Nav.Link href="#register">Register</Nav.Link>
                             {/* <Nav.Link eventKey={2} href="#memes">
                                 Dank memes
