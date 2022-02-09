@@ -27,7 +27,7 @@ function App() {
         <Router>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
-            <Route  path="/login" component={LoginPage} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
 
           {/* === Keperluan test API === */}
