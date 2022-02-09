@@ -1,54 +1,80 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Form, FormGroup, Label, Input} from 'reactstrap';
+import { Redirect } from 'react-router-dom'
+import {
+  Form,
+  Container,
+  Row
+} from 'react-bootstrap'
 import Navbar from './partials/Navbar'
+import firebase from '../auth/firebase';
+import { AuthContext } from "../auth/Auth";
 
 
+class LoginPage extends Component{
+  static contextType = AuthContext; 
+  constructor(props){
+      super(props);
 
+      this.state ={};
+  }
 
-function loginPage() {
-  return (
-    <>
-<Navbar />
-<Form inline>
-  <FormGroup>
-    <Label
-      for="exampleEmail"
-      hidden
-    >
-      Email
-    </Label>
-    <Input
-      id="exampleEmail"
-      name="email"
-      placeholder="Email"
-      type="email"
-    />
-  </FormGroup>
-  {' '}
-  <FormGroup>
-    <Label
-      for="examplePassword"
-      hidden
-    >
-      Password
-    </Label>
-    <Input
-      id="examplePassword"
-      name="password"
-      placeholder="Password"
-      type="password"
-    />
-  </FormGroup>
-  {' '}
-  <Button>
-    Login
-  </Button>
-</Form>
+  set = name => event => {
+      console.log(event.target.value)  
+      this.setState({[name]: event.target.value});
+  }
 
-</>
-  );
+  handleSubmit = async(event) => {
+      const { email, password}  = this.state;
+      const { history } = this.props
+      event.preventDefault();
+
+       // Validasi
+       if(!email || !password) return alert('Please insert missing credentials!')
+
+       // Register via Firebase
+       try {
+          const login = await firebase.auth().signInWithEmailAndPassword(email, password)
+           history.push('/');
+       } catch(error) {
+           alert('Failed to Login')
+           console.log(error)
+       }
+  }
+
+  render(){
+      const { currentUser } = this.context
+      if (!!currentUser) return <Redirect to="/" />
+      return(
+          <div>
+              <Row>
+              <Container className='col-4'>
+                  <Form onSubmit={this.handleSubmit}>
+                      <Form.Group className="mb-3" >
+                          <Form.Label>Email address</Form.Label>
+                          <Form.Control type="email" 
+                              placeholder="Enter email"
+                              name="email"
+                              value={this.state.value}
+                              onChange = {this.set('email')} />
+                      </Form.Group>    
+                      <Form.Group className="mb-3" >
+                          <Form.Label>Password</Form.Label>
+                          <Form.Control type="text" 
+                              placeholder="Enter password"
+                              name="password"
+                              value={this.state.value}
+                              onChange = {this.set('password')} />
+                      </Form.Group>
+                      
+                      <input type="submit" value="Submit" className=' btn btn-success'/>      
+                  </Form>
+              </Container>
+              
+              </Row>
+          </div>
+      )
+  }
 }
 
-
-export default loginPage; 
+export default LoginPage; 
