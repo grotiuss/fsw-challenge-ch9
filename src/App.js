@@ -22,8 +22,8 @@ function App() {
   return (
 
     <div>
-      <Navbars />
       <AuthProvider>
+      <Navbars />
         <Router>
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
