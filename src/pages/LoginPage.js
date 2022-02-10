@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
-// import {
-//   Form,
-//   Container,
-//   Row
-// } from 'react-bootstrap'
-import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 
-import Navbar from './partials/Navbar'
+import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
 import firebase from '../auth/firebase';
 import { AuthContext } from "../auth/Auth";
 
