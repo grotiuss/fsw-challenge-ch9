@@ -7,14 +7,7 @@ import { AuthContext } from "../../auth/Auth";
 import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem, NavDropdown } from 'react-bootstrap';
 
 class Navbars extends Component {
-    static contextType = AuthContext; 
-    constructor(props){
-        super(props);
-  
-        this.state ={
-            signedIn: ''
-        };
-    }
+    static contextType = AuthContext
     showLog(){
         
         const user = firebase.auth().currentUser;
@@ -53,6 +46,7 @@ class Navbars extends Component {
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                            
                         </NavDropdown>
                         </Nav>
                         <Nav>
