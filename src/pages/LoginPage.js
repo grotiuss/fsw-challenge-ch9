@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
-import {
-  Form,
-  Container,
-  Row
-} from 'react-bootstrap'
+// import {
+//   Form,
+//   Container,
+//   Row
+// } from 'react-bootstrap'
+import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
+
 import Navbar from './partials/Navbar'
 import firebase from '../auth/firebase';
 import { AuthContext } from "../auth/Auth";
@@ -46,33 +48,50 @@ class LoginPage extends Component{
       const { currentUser } = this.context
       if (!!currentUser) return <Redirect to="/" />
       return(
-          <div>
-              <Row>
-              <Container className='col-4'>
-                  <Form onSubmit={this.handleSubmit}>
-                      <Form.Group className="mb-3" >
-                          <Form.Label>Email address</Form.Label>
-                          <Form.Control type="email" 
-                              placeholder="Enter email"
-                              name="email"
-                              value={this.state.value}
-                              onChange = {this.set('email')} />
-                      </Form.Group>    
-                      <Form.Group className="mb-3" >
-                          <Form.Label>Password</Form.Label>
-                          <Form.Control type="text" 
-                              placeholder="Enter password"
-                              name="password"
-                              value={this.state.value}
-                              onChange = {this.set('password')} />
-                      </Form.Group>
-                      
-                      <input type="submit" value="Submit" className=' btn btn-success'/>      
-                  </Form>
-              </Container>
-              
-              </Row>
-          </div>
+        <>
+        <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
+            <h1>LOGIN</h1>                       
+        </Col>
+        <Container>
+        <Form inline onSubmit={this.handleSubmit}>
+          
+          <FormGroup>
+            <Label
+              for="exampleEmail"
+              hidden
+            >
+              Your Email
+            </Label>
+            <Input
+              id="exampleEmail"
+              name="email"
+              placeholder="Your Email"
+              type="email"
+              onChange={this.set('email')}
+            />
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <Label
+              hidden
+            >
+              Your Password
+            </Label>
+            <Input
+              name="password"
+              placeholder="Your Password"
+              onChange={this.set('password')}
+              type="password"
+            />
+            </FormGroup>
+
+          <Button className='btn-success'>
+            Login
+          </Button>
+        </Form>
+        </Container>
+  
+      </>
       )
   }
 }
