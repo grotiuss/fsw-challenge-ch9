@@ -84,7 +84,7 @@ function Home() {
                     </Row>
                     <Row className="justify-content-center">
                         <Col xs={12} sm={12} md={12} className="text-center">
-                            <a href="#game-list" className="btn main-button btn-warning mt-3" id='text-main-button' target="_blank"  style={
+                            <a href="#game-list" className="btn main-button btn-warning mt-3" id='text-main-button'  style={
                                 {
                                     whiteSpace: 'nowrap',
                                     fontWeight: 'bold'
