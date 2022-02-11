@@ -8,6 +8,18 @@
     height: 50vh;   
 }
 
+@media (max-width: 576px) {
+    #header {
+        background-image: linear-gradient(transparent 5em, black), url(../../public/assets/main-bg.jpg), url(../../public/assets/main-bg.jpg);
+        background-size: cover;
+        background-position: center;
+        height: 100vh;   
+
+        padding-top: 20%;
+        padding-bottom: 20%
+    }
+}
+
 #header h1 {
     font-family: 'Bebas Neue', cursive;
     font-size: 5em;
