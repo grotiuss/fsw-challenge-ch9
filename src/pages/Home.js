@@ -46,22 +46,26 @@ class Home extends Component {
             buttonPopUp : false,
             gameShowed : {},
             gameList : null,
-            isLoading : false
+            isLoading : true
         }
     }
 
-    // setTrigger() {
-    //     // this.setState({
-    //     //     buttonPopUp: true
-    //     // })
-    //     console.log('Clicked');
-    // } 
-
     componentDidMount() {
-        // this.setState({
-        //     buttonPopUp: true
-        // })
-        // this.setTrigger()
+        this.GetData()
+    }
+
+    async GetData() {
+        try{
+            const snapshot = await firebase.database().ref('game-list').once('value')
+            this.setState({
+                isLoading: false,
+                gameList: Object.values(snapshot.val())
+            })
+
+            console.log(this.state.gameList)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     get Content () {
@@ -82,40 +86,8 @@ class Home extends Component {
                 })
             }
         }
-        const gameList = [
-            {
-                name: 'Rock Paper Scissors',
-                description: 'Permaianan suit batu gunting kertas'
-            },
-            {
-                name: 'Snake and Ladder',
-                description: 'Permainan ular tangga'
-            },
-            {
-                name: 'Ludo',
-                description: 'Permainan ludo'
-            },
-            {
-                name: 'Rock Paper Scissors',
-                description: 'Permaianan suit batu gunting kertas'
-            },
-            {
-                name: 'Snake and Ladder',
-                description: 'Permainan ular tangga'
-            },
-            {
-                name: 'Ludo',
-                description: 'Permainan ludo'
-            },
-            {
-                name: 'Snake and Ladder',
-                description: 'Permainan ular tangga'
-            },
-            {
-                name: 'Ludo',
-                description: 'Permainan ludo'
-            }
-        ]
+        const gameList = this.state.gameList
+        
         return (
             <div className='bg-black'>
                 <Container id='header' fluid>
