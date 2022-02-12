@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import './Home.css'
@@ -12,25 +12,27 @@ import Navbar from './partials/Navbar'
 //     )
 // }
 
+import GameDetailPopUp from './GameDetailPopUp'
+
 class GameCard extends Component {
     render() {
-        const { title, description, imageFileName } = this.props
+        const { item, setTrigger} = this.props
         const gameImage = require('./rock-paper-scissor.jpg')
         return (
             <>
-                <div className='text-center pb-3'>
+                <button className='text-center p-0' onClick={() => {
+                    setTrigger(item, true)
+                }}>
                     <Image style={
                         {
                             resize:'cover',
-                            height: '100%',
                             width: '100%'
                         }
                     } src={gameImage} />
-
-                </div>
-                <span className='game-list-name'>{title}</span>
+                </button>
+                <span className='game-list-name'>{item.name}</span>
                 <br></br>
-                <span style={ { color: 'white', fontSize:'100%' } }>{description}</span>
+                <span style={ { color: 'white', fontSize:'100%' } }>{item.description}</span>
             </>
         )
     }
@@ -38,13 +40,22 @@ class GameCard extends Component {
 
 function Home() {
     let styleObj = { fontSize: '80px' }
+    const [buttonPopUp, setButtonPopUp] = useState(false);
+    const [gameShowed, setGameShowed] = useState('')
+
+    const setTrigger = (item, popup = true) => {
+        setButtonPopUp(popup)
+        setGameShowed(item)
+        console.log(item)
+    }
+
     const gameList = [
         {
             name: 'Rock Paper Scissors',
             description: 'Permaianan suit batu gunting kertas'
         },
         {
-            name: 'Snake and Stair',
+            name: 'Snake and Ladder',
             description: 'Permainan ular tangga'
         },
         {
@@ -110,13 +121,17 @@ function Home() {
                         {gameList.map((item) => {
                             return(
                                 <Col className='col-md-3 col-6 mb-5'>
-                                    <GameCard title={item.name} description={item.description} imageFileName={'ladida'} />
+                                    <GameCard  item={item} setTrigger={setTrigger}/>
                                 </Col>
                             )
                         })}
                     </Row>
                 
                 </Container>
+                <GameDetailPopUp trigger={buttonPopUp} setTrigger={setButtonPopUp} >
+                    <h3>{gameShowed.name}</h3>
+                    <p>{gameShowed.description}</p>
+                </GameDetailPopUp>
             </Container>
         </body>
     );
