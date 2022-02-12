@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage'
 
 // === Ini untuk percobaan connect form ke API === 
   import RegisterTest from './pages/RegisterTest'
+  import FetchDataTest from './pages/FetchDataTest'
 // ===============================================
 /**
  * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
@@ -33,6 +34,7 @@ function App() {
           {/* === Keperluan test API === */}
             <Route  path="/navbar-test" component={Navbars} />
             <Route  path="/register-test" component={RegisterTest} />
+            <Route  path="/fetch-test" component={FetchDataTest} />
           {/* ========================== */}
           
           </Switch>
