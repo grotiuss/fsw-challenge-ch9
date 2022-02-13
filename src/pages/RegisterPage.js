@@ -22,18 +22,24 @@ class RegisterPage extends Component{
   }
 
   handleSubmit = async(event) => {
-    const { email, password, passwordConfirm, agreeStatement}  = this.state;
+    const { email, password, passwordConfirm, agreeStatement, name}  = this.state;
     const { history } = this.props
     event.preventDefault();
 
      // Validasi
-     if(!email || !password) return alert('Please insert missing credentials!')
+     if(!email || !password || !name) return alert('Please insert missing credentials!')
      if(password !== passwordConfirm) return alert('Password did not match!')
      if(!agreeStatement) return alert('Please agree with the terms to continue!')
 
      // Register via Firebase
      try {
-        const register = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+                      .then(result => {
+                        return result.user.updateProfile({
+                          displayName: name
+                        })
+                      .catch(error => console.log(error))
+                      })
          history.push('/');
      } catch(error) {
          alert(error.message)
@@ -51,7 +57,22 @@ class RegisterPage extends Component{
       </Col>
       <Container>
       <Form inline onSubmit={this.handleSubmit}>
-        
+      <FormGroup>
+        <Label
+          for="exampleName"
+          hidden
+        >
+          Your Name
+        </Label>
+        <Input
+          id="exampleName"
+          name="name"
+          placeholder="Your Name"
+          type="text"
+          onChange={this.set('name')}
+        />
+      </FormGroup>
+      {' '}
         <FormGroup>
           <Label
             for="exampleEmail"

@@ -11,8 +11,9 @@ class Navbars extends Component {
     showLog(){
         
         const user = firebase.auth().currentUser;
-        
         if(user != null){
+            console.log("email: " + user.email)
+            console.log("name: " + user.displayName)
             console.log("Navbar Status: User is signed in")
             return(
                 <>
