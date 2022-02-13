@@ -17,26 +17,39 @@ class RegisterPage extends Component{
   }
 
   set = name => event => {
-      console.log(event.target.value)  
+      // console.log(event.target.value)  
       this.setState({[name]: event.target.value});
   }
 
   handleSubmit = async(event) => {
-    const { email, password, passwordConfirm, agreeStatement}  = this.state;
+    const { email, password, passwordConfirm, agreeStatement, name}  = this.state;
     const { history } = this.props
     event.preventDefault();
-
+    var generateID = Date.now() + "" + Math.floor(Math.random() * (200 - 100 ) + 100) 
      // Validasi
-     if(!email || !password) return alert('Please insert missing credentials!')
+     if(!email || !password || !name) return alert('Please insert missing credentials!')
      if(password !== passwordConfirm) return alert('Password did not match!')
      if(!agreeStatement) return alert('Please agree with the terms to continue!')
 
      // Register via Firebase
      try {
-        const register = await firebase.auth().createUserWithEmailAndPassword(email, password)
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+                      .then(async result => {
+                        try {
+                          return await result.user.updateProfile({
+                            displayName: name
+                          });
+                        } catch (error) {
+                          return console.log(error);
+                        }
+                      })
+        const userID = firebase.auth().currentUser.uid
+        await firebase.database()
+                      .ref(`profile/${userID}`)
+                      .set({name: name, ID: userID, description: '', point: 0})
          history.push('/');
      } catch(error) {
-         alert('Failed to Login')
+         alert(error.message)
          console.log(error)
      }
 }
@@ -51,7 +64,22 @@ class RegisterPage extends Component{
       </Col>
       <Container>
       <Form inline onSubmit={this.handleSubmit}>
-        
+      <FormGroup>
+        <Label
+          for="exampleName"
+          hidden
+        >
+          Your Name
+        </Label>
+        <Input
+          id="exampleName"
+          name="name"
+          placeholder="Your Name"
+          type="text"
+          onChange={this.set('name')}
+        />
+      </FormGroup>
+      {' '}
         <FormGroup>
           <Label
             for="exampleEmail"

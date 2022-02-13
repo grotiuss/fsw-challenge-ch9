@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  console.log(currentUser)
+  // console.log(currentUser)
   
   if(pending){
     return <>Loading...</>
