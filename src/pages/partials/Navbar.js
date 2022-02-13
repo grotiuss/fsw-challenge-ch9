@@ -8,13 +8,11 @@ import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem,
 
 class Navbars extends Component {
     static contextType = AuthContext
+    
     showLog(){
         
         const user = firebase.auth().currentUser;
         if(user != null){
-            console.log("email: " + user.email)
-            console.log("name: " + user.displayName)
-            console.log("Navbar Status: User is signed in")
             return(
                 <>
                     <Nav.Link className='text-success fw-bold'>{user.displayName}</Nav.Link>

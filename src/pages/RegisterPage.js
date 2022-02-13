@@ -17,7 +17,7 @@ class RegisterPage extends Component{
   }
 
   set = name => event => {
-      console.log(event.target.value)  
+      // console.log(event.target.value)  
       this.setState({[name]: event.target.value});
   }
 
@@ -25,7 +25,7 @@ class RegisterPage extends Component{
     const { email, password, passwordConfirm, agreeStatement, name}  = this.state;
     const { history } = this.props
     event.preventDefault();
-
+    var generateID = Date.now() + "" + Math.floor(Math.random() * (200 - 100 ) + 100) 
      // Validasi
      if(!email || !password || !name) return alert('Please insert missing credentials!')
      if(password !== passwordConfirm) return alert('Password did not match!')
@@ -34,12 +34,19 @@ class RegisterPage extends Component{
      // Register via Firebase
      try {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
-                      .then(result => {
-                        return result.user.updateProfile({
-                          displayName: name
-                        })
-                      .catch(error => console.log(error))
+                      .then(async result => {
+                        try {
+                          return await result.user.updateProfile({
+                            displayName: name
+                          });
+                        } catch (error) {
+                          return console.log(error);
+                        }
                       })
+        const userID = firebase.auth().currentUser.uid
+        await firebase.database()
+                      .ref(`profile/${userID}`)
+                      .set({name: name, ID: userID, description: '', point: 0})
          history.push('/');
      } catch(error) {
          alert(error.message)
