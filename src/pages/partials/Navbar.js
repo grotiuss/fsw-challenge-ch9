@@ -10,7 +10,8 @@ class Navbars extends Component {
     static contextType = AuthContext
     
     showLog(){
-        
+        /* const userID = firebase.auth().currentUser.uid
+         firebase.database().ref(`profile/${userID}`).update({description: "Hi my name is Medhawi!"}) */
         const user = firebase.auth().currentUser;
         if(user != null){
             return(
