@@ -17,7 +17,9 @@ class Navbars extends Component {
             console.log("Navbar Status: User is signed in")
             return(
                 <>
-                    <Nav.Link onClick={() => firebase.auth().signOut()}>Sign out</Nav.Link>
+                    <Nav.Link className='text-success fw-bold' disabled>{user.displayName}</Nav.Link>
+                    <Nav.Link className='border-end me-1'></Nav.Link>
+                    <Nav.Link onClick={() => firebase.auth().signOut()}>Sign Out</Nav.Link>
                 </>
             )
         }else{
