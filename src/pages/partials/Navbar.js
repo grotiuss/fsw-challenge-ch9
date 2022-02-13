@@ -11,9 +11,9 @@ class Navbars extends Component {
     showLog(){
         
         const user = firebase.auth().currentUser;
-        console.log("ShowLog:" + user)
+        
         if(user != null){
-            console.log("User is signed in")
+            console.log("Navbar Status: User is signed in")
             return(
                 <>
                     <Nav.Link onClick={() => firebase.auth().signOut()}>Sign out</Nav.Link>

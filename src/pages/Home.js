@@ -123,11 +123,12 @@ class Home extends Component {
                     </Container>
                     <Container>
                         <Row className='justify-content-center mt-3'>
-                            {gameList.map((item) => {
+                            {gameList.map((item, index) => {
                                 const triggerr = this.setTrigger
+                                
                                 return(
-                                    <Col className='col-md-3 col-6 mb-5'>
-                                        <GameCard  item={item} setTrigger={gameDetailTrigger}/>
+                                    <Col className='col-md-3 col-6 mb-5' key={index}>
+                                        <GameCard item={item} setTrigger={gameDetailTrigger}/>
                                     </Col>
                                 )
                             })}

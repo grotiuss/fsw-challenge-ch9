@@ -36,7 +36,7 @@ class RegisterPage extends Component{
         const register = await firebase.auth().createUserWithEmailAndPassword(email, password)
          history.push('/');
      } catch(error) {
-         alert('Failed to Login')
+         alert(error.message)
          console.log(error)
      }
 }
