@@ -13,6 +13,7 @@ class Navbars extends Component {
         /* const userID = firebase.auth().currentUser.uid
          firebase.database().ref(`profile/${userID}`).update({description: "Hi my name is Medhawi!"}) */
         const user = firebase.auth().currentUser;
+
         if(user != null){
             return(
                 <>

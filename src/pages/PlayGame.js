@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PlayGame from './PlayGame.css'
 
+import firebase from '../auth/firebase';
+import { AuthContext } from "../auth/Auth";
+
 import { Row, Col } from 'reactstrap'
 
 //icon
@@ -8,6 +11,8 @@ import Paper from '../images/icon-paper.svg'
 import Rock from '../images/icon-rock.svg'
 import Scissors from '../images/icon-scissors.svg'
 import Refresh from '../images/refresh.png'
+
+
 
 const Ngegame = () => {
   const [userChoice, setUserChoice] = useState(null)
@@ -17,6 +22,10 @@ const Ngegame = () => {
   const [stringResult, setStringResult] = useState([])
   const [numofWinUser, setnumofWinUser] = useState(0)
   const [numofWinComp, setnumofWinComp] = useState(0)
+
+  const userID = firebase.auth().currentUser.uid
+  const dbGame = firebase.database().ref(`games/rps/${userID}`)
+  const dbProfile = firebase.database().ref(`profile/${userID}`)
 
   const choices = [
     {
@@ -37,15 +46,28 @@ const Ngegame = () => {
   ]
 
   const handleClick = (value) => {
-    console.log('Handling Click!')
+    // console.log('1. Handling Click!')
     setUserChoice(value)
     generateComputerChoice()
   }
 
   const generateComputerChoice = () => {
-    console.log("Generating computer choices")
+    // console.log("2. Generating computer choices")
     const randomChoice = choices[Math.floor(Math.random() * choices.length)].name
     setComputerChoice(randomChoice)
+  }
+
+  
+  const gameToDatabase = async (points) =>{
+    const snapshot = await dbGame.once('value')
+    const profileSnapshot = await dbProfile.once('value')
+    dbProfile.update({point: profileSnapshot.val().point + points})
+    if(snapshot.val() == null){
+      dbGame.update({point: points})
+    }else{
+      var currentDBPoint = snapshot.val().point
+      dbGame.update({point: currentDBPoint + points})
+    }
   }
 
   useEffect(() => {
@@ -53,10 +75,12 @@ const Ngegame = () => {
   }, [userChoice, computerChoice])
 
   const checkResult = () => {
+    console.log('3. checking result')
     switch (userChoice + computerChoice) {
       case 'scissorspaper':
       case 'rockscissors':
       case 'paperrock':
+        // console.log('4. checking win')
         setResult('YOU WIN!')
         setnumofWinUser( + 1)
         setStringResult((old) => [...old, 'win'])
@@ -64,13 +88,16 @@ const Ngegame = () => {
       case 'paperscissors':
       case 'scissorsrock':
       case 'rockpaper':
+        // console.log('4. checking lose')
         setResult('YOU LOSE!')
         setnumofWinComp( + 1)
         setStringResult((old) => [...old, 'lose'])
+
         break
       case 'rockrock':
       case 'paperpaper':
       case 'scissorsscissors':
+        // console.log('4.checking draw')
         setResult(`IT'S A DRAW!`)
         setStringResult((old) => [...old, 'draw'])
         break
@@ -94,20 +121,16 @@ const Ngegame = () => {
     })
 
     if(numofWinUser == numofWinComp){
-      console.log('draw')
+      console.log('Result: draw');
+      gameToDatabase(1)
     }else if(numofWinUser > numofWinComp){
-      console.log('win bro')
+      console.log('Result: win bro');
+      gameToDatabase(2)
+
     }else if(numofWinUser < numofWinComp){
-      console.log('kamu kalah ')
+      console.log('Result: kamu kalah ')
     }
 
-    // if (counts.win >= 2) {
-    //   console.log('win bro')
-    // } else if (counts.lose >= 2) {
-    //   console.log('kamu kalah ')
-    // } else {
-    //   console.log('draw')
-    // }
   }
 
   const reset = () => {
