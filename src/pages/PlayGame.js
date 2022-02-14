@@ -15,6 +15,8 @@ const Ngegame = () => {
   const [result, setResult] = useState(null)
   const [indexResult, setIndexResult] = useState(null)
   const [stringResult, setStringResult] = useState([])
+  const [numofWinUser, setnumofWinUser] = useState(0)
+  const [numofWinComp, setnumofWinComp] = useState(0)
 
   const choices = [
     {
@@ -35,11 +37,13 @@ const Ngegame = () => {
   ]
 
   const handleClick = (value) => {
+    console.log('Handling Click!')
     setUserChoice(value)
     generateComputerChoice()
   }
 
   const generateComputerChoice = () => {
+    console.log("Generating computer choices")
     const randomChoice = choices[Math.floor(Math.random() * choices.length)].name
     setComputerChoice(randomChoice)
   }
@@ -54,12 +58,14 @@ const Ngegame = () => {
       case 'rockscissors':
       case 'paperrock':
         setResult('YOU WIN!')
+        setnumofWinUser( + 1)
         setStringResult((old) => [...old, 'win'])
         break
       case 'paperscissors':
       case 'scissorsrock':
       case 'rockpaper':
         setResult('YOU LOSE!')
+        setnumofWinComp( + 1)
         setStringResult((old) => [...old, 'lose'])
         break
       case 'rockrock':
@@ -83,15 +89,25 @@ const Ngegame = () => {
   const checkFinalResult = () => {
     const counts = {}
     stringResult.forEach(function (x) {
+      console.log(x)
       counts[x] = (counts[x] || 0) + 1
     })
-    if (counts.win >= 2) {
-      console.log('win bro')
-    } else if (counts.lose >= 2) {
-      console.log('kamu kalah ')
-    } else {
+
+    if(numofWinUser == numofWinComp){
       console.log('draw')
+    }else if(numofWinUser > numofWinComp){
+      console.log('win bro')
+    }else if(numofWinUser < numofWinComp){
+      console.log('kamu kalah ')
     }
+
+    // if (counts.win >= 2) {
+    //   console.log('win bro')
+    // } else if (counts.lose >= 2) {
+    //   console.log('kamu kalah ')
+    // } else {
+    //   console.log('draw')
+    // }
   }
 
   const reset = () => {
@@ -107,7 +123,7 @@ const Ngegame = () => {
       <div className="pt-3">
         <div className="card-info d-flex justify-content-between">
           <h3>Rock Paper Scissors</h3>
-          Final Result : {stringResult}
+          Final Result : {stringResult} 
           <button className="btn-rules">Rules</button>
           <div className="text-center card-score d-flex justify-content-center align-items-center">
             <h5 style={{ marginRight: '10px' }}>Score</h5>
