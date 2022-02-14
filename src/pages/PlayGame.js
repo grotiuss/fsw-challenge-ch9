@@ -14,6 +14,9 @@ const Ngegame = () => {
   const [computerChoice, setComputerChoice] = useState(null)
   const [result, setResult] = useState(null)
   const [indexResult, setIndexResult] = useState(null)
+  const [stringResult, setStringResult] = useState([])
+  const [numofWinUser, setnumofWinUser] = useState(0)
+  const [numofWinComp, setnumofWinComp] = useState(0)
 
   const choices = [
     {
@@ -34,36 +37,78 @@ const Ngegame = () => {
   ]
 
   const handleClick = (value) => {
+    console.log('Handling Click!')
     setUserChoice(value)
     generateComputerChoice()
   }
 
   const generateComputerChoice = () => {
+    console.log("Generating computer choices")
     const randomChoice = choices[Math.floor(Math.random() * choices.length)].name
     setComputerChoice(randomChoice)
   }
 
   useEffect(() => {
+    checkResult()
+  }, [userChoice, computerChoice])
+
+  const checkResult = () => {
     switch (userChoice + computerChoice) {
       case 'scissorspaper':
       case 'rockscissors':
       case 'paperrock':
         setResult('YOU WIN!')
+        setnumofWinUser( + 1)
+        setStringResult((old) => [...old, 'win'])
         break
       case 'paperscissors':
       case 'scissorsrock':
       case 'rockpaper':
         setResult('YOU LOSE!')
+        setnumofWinComp( + 1)
+        setStringResult((old) => [...old, 'lose'])
         break
       case 'rockrock':
       case 'paperpaper':
       case 'scissorsscissors':
         setResult(`IT'S A DRAW!`)
+        setStringResult((old) => [...old, 'draw'])
         break
     }
     const indexOfResult = choices.findIndex((i) => i.name == computerChoice)
     setIndexResult(indexOfResult)
-  }, [computerChoice, userChoice, result])
+  }
+
+  useEffect(() => {
+    if (stringResult.length == 3) {
+      console.log(stringResult)
+      checkFinalResult()
+    }
+  }, [stringResult])
+
+  const checkFinalResult = () => {
+    const counts = {}
+    stringResult.forEach(function (x) {
+      console.log(x)
+      counts[x] = (counts[x] || 0) + 1
+    })
+
+    if(numofWinUser == numofWinComp){
+      console.log('draw')
+    }else if(numofWinUser > numofWinComp){
+      console.log('win bro')
+    }else if(numofWinUser < numofWinComp){
+      console.log('kamu kalah ')
+    }
+
+    // if (counts.win >= 2) {
+    //   console.log('win bro')
+    // } else if (counts.lose >= 2) {
+    //   console.log('kamu kalah ')
+    // } else {
+    //   console.log('draw')
+    // }
+  }
 
   const reset = () => {
     setComputerChoice(null)
@@ -78,6 +123,8 @@ const Ngegame = () => {
       <div className="pt-3">
         <div className="card-info d-flex justify-content-between">
           <h3>Rock Paper Scissors</h3>
+          Final Result : {stringResult} 
+          <button className="btn-rules">Rules</button>
           <div className="text-center card-score d-flex justify-content-center align-items-center">
             <h5 style={{ marginRight: '10px' }}>Score</h5>
             <h3 className="font-weight-bold" style={{ fontSize: '40px' }}>
@@ -120,7 +167,7 @@ const Ngegame = () => {
             </Col>
             <Col cols="4" className="d-flex justify-content-end align-items-center">
               <div className="mt-4">
-                <div className="btn-game d-flex justify-content-center align-items-center" style={{ border: `10px solid green` }}>
+                <div className="btn-game d-flex justify-content-center align-items-center btn-game-computer" style={{ border: `10px solid green` }}>
                   {computerChoice ? <img src={choices[indexResult]?.icon} alt="halo" /> : <div>Loading...</div>}
                 </div>
               </div>
