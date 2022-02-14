@@ -16,7 +16,7 @@ class LoginPage extends Component{
   }
 
   set = name => event => {
-      console.log(event.target.value)  
+      // console.log(event.target.value)  
       this.setState({[name]: event.target.value});
   }
 
