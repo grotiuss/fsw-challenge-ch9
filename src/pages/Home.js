@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import firebase from '../auth/firebase';
 import './Home.css'
@@ -77,7 +77,8 @@ class Home extends Component {
                 this.setState({
                     gameShowed: {
                         name: item.name,
-                        description: item.description
+                        description: item.description,
+                        route: item.route
                     }
                 })
             } else {
@@ -125,7 +126,6 @@ class Home extends Component {
                         <Row className='justify-content-center mt-3'>
                             {gameList.map((item, index) => {
                                 const triggerr = this.setTrigger
-                                
                                 return(
                                     <Col className='col-md-3 col-6 mb-5' key={index}>
                                         <GameCard item={item} setTrigger={gameDetailTrigger}/>
@@ -137,6 +137,7 @@ class Home extends Component {
                     <GameDetailPopUp trigger={this.state.buttonPopUp} setTrigger={gameDetailTrigger}>
                         <h3>{this.state.gameShowed.name}</h3>
                         <p>{this.state.gameShowed.description}</p>
+                        <a className='btn btn-success' href={this.state.gameShowed.route}>Play!</a>
                     </GameDetailPopUp>
                 </Container>
             </div>
