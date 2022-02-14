@@ -9,6 +9,8 @@ import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 //Untuk router RegisterPage
 import RegisterPage from './pages/RegisterPage';
+//Untuk router ProfilePage
+import ProfilePage from './pages/ProfilePage'
 
 // === Ini untuk percobaan connect form ke API === 
   import RegisterTest from './pages/RegisterTest'
@@ -32,6 +34,7 @@ function App() {
         {/* ========================== */}
         <Route exact path="/Login" element={<LoginPage />} />
         <Route exact path="/Register" element={<RegisterPage />} />
+        <Route exact path="/Profile" element={<ProfilePage />} />
       </Routes>
     </Router>
     // <div className="App">
