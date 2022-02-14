@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import PlayGame from './PlayGame.css'
 
 import firebase from '../auth/firebase';
-import { AuthContext } from "../auth/Auth";
 
 import { Row, Col } from 'reactstrap'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
@@ -65,15 +64,45 @@ const Ngegame = () => {
   }
 
   
-  const gameToDatabase = async (points) =>{
-    const snapshot = await dbGame.once('value')
-    const profileSnapshot = await dbProfile.once('value')
-    dbProfile.update({point: profileSnapshot.val().point + points})
+  const pointToDB = async (points) =>{
+    let snapshot = await dbGame.once('value')
+    let profileSnapshot = await dbProfile.once('value')
+
+    await dbProfile.update({point: profileSnapshot.val().point + points})
     if(snapshot.val() == null){
-      dbGame.update({point: points})
+      dbGame.update({
+        point: points,
+      })
     }else{
-      var currentDBPoint = snapshot.val().point
-      dbGame.update({point: currentDBPoint + points})
+      let currentDBInfo = snapshot.val().point
+      dbGame.update({
+        point: currentDBInfo + points,
+      })
+    }
+  }
+
+  const statToDB = async (name) => {
+    let snapshot = await dbGame.once('value')
+    
+    if(snapshot.val() == null){
+      console.log('updated with null')
+      dbGame.update({
+        win: 0,
+        lose: 0,
+        draw: 0
+      }).then(dbGame.update({[name]: 1}))
+    }else{
+      var currentDBInfo = snapshot.val()
+      if(name == 'win'){
+        console.log('updated with win')
+        dbGame.update({win: currentDBInfo.win + 1})
+      }else if(name == 'lose'){
+        console.log('updated with lose')
+        dbGame.update({lose: currentDBInfo.lose + 1})
+      }else if(name == 'draw'){
+        console.log('updated with draw')
+        dbGame.update({draw: currentDBInfo.draw + 1})
+      }
     }
   }
 
@@ -82,7 +111,6 @@ const Ngegame = () => {
   }, [userChoice, computerChoice])
 
   const checkResult = () => {
-    console.log('3. checking result')
     switch (userChoice + computerChoice) {
       case 'scissorspaper':
       case 'rockscissors':
@@ -132,12 +160,18 @@ const Ngegame = () => {
     if (numofWinUser == numofWinComp) {
       setFinalResult('Draw')
       setTotalDraw(totalDraw + 1)
+      pointToDB(1)
+      statToDB('draw')
     } else if (numofWinUser > numofWinComp) {
       setFinalResult('Win')
       setTotalWin(totalWin + 1)
+      pointToDB(2)
+      statToDB('win')
     } else if (numofWinUser < numofWinComp) {
       setFinalResult('Lose')
       setTotalLose(totalLose + 1)
+      pointToDB(0)
+      statToDB('lose')
     }
     setModal(true)
   }
