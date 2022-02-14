@@ -29,9 +29,9 @@ function App() {
         <Navbars />
         <Router>
           <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <PrivateRoute exact path="/play" component={PlayGame} />
 
+            <PrivateRoute exact path="/play" component={PlayGame} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
 
@@ -40,6 +40,7 @@ function App() {
             <Route path="/register-test" component={RegisterTest} />
             <Route path="/fetch-test" component={FetchDataTest} />
             {/* ========================== */}
+
           </Switch>
         </Router>
       </AuthProvider>
