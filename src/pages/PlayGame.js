@@ -23,6 +23,8 @@ const Ngegame = () => {
   const [numofWinUser, setnumofWinUser] = useState(0)
   const [numofWinComp, setnumofWinComp] = useState(0)
 
+
+
   const userID = firebase.auth().currentUser.uid
   const dbGame = firebase.database().ref(`games/rps/${userID}`)
   const dbProfile = firebase.database().ref(`profile/${userID}`)
@@ -46,13 +48,11 @@ const Ngegame = () => {
   ]
 
   const handleClick = (value) => {
-    // console.log('1. Handling Click!')
     setUserChoice(value)
     generateComputerChoice()
   }
 
   const generateComputerChoice = () => {
-    // console.log("2. Generating computer choices")
     const randomChoice = choices[Math.floor(Math.random() * choices.length)].name
     setComputerChoice(randomChoice)
   }
@@ -80,7 +80,6 @@ const Ngegame = () => {
       case 'scissorspaper':
       case 'rockscissors':
       case 'paperrock':
-        // console.log('4. checking win')
         setResult('YOU WIN!')
         setnumofWinUser( + 1)
         setStringResult((old) => [...old, 'win'])
@@ -88,7 +87,6 @@ const Ngegame = () => {
       case 'paperscissors':
       case 'scissorsrock':
       case 'rockpaper':
-        // console.log('4. checking lose')
         setResult('YOU LOSE!')
         setnumofWinComp( + 1)
         setStringResult((old) => [...old, 'lose'])
@@ -97,7 +95,6 @@ const Ngegame = () => {
       case 'rockrock':
       case 'paperpaper':
       case 'scissorsscissors':
-        // console.log('4.checking draw')
         setResult(`IT'S A DRAW!`)
         setStringResult((old) => [...old, 'draw'])
         break
