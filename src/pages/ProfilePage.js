@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Container, Form, Button, Modal, } from 'react-bootstrap';
-// import {Card, ListGroup, ListGroupItem, Col, Row, Container, Form, Input} from 'reactstrap'
+
 import firebase from '../auth/firebase';
 
 
@@ -48,10 +48,15 @@ class ProfilePage extends Component{
     let userID = firebase.auth().currentUser
     let profileDB = firebase.database().ref(`profile/${userID.uid}`)
     event.preventDefault()
-    console.log(image)
+
+    console.log(description.length)
+    if(description.length > 200){
+      return alert('Your description has surpassed the maximum amount!')
+    }
     try {
       await profileDB.update(
             {
+              username: username,
               description: description,
               imageLink: image
             }).then(userID.updateProfile({
@@ -88,7 +93,6 @@ class ProfilePage extends Component{
                 <img 
                 alt='Profile'
                 className='img-thumbnail'
-                // src="https://media.istockphoto.com/photos/handara-gate-bali-picture-id1137010913?k=20&amp;m=1137010913&amp;s=612x612&amp;w=0&amp;h=qeHQgAgKdRWJA_p_OmKq3GBKZMAuskkg-o7MJTR_Vzs=" 
                 src={this.state.image}
                 />
               </button>

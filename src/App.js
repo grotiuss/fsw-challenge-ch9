@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 //Untuk router ProfilePage
 import ProfilePage from './pages/ProfilePage';
+import ProfileList from './pages/ProfileList'
 
 //Playing Game
 import PlayGame from './pages/PlayGame'
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/profile-list" component={ProfileList} />
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
