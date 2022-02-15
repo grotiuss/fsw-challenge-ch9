@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
+import styled from 'styled-components'
 import { Row, Col, Card, Image } from 'react-bootstrap';
 import firebase from '../auth/firebase';
 import './Home.css'
@@ -134,11 +135,7 @@ class Home extends Component {
                             })}
                         </Row>
                     </Container>
-                    <GameDetailPopUp trigger={this.state.buttonPopUp} setTrigger={gameDetailTrigger}>
-                        <h3>{this.state.gameShowed.name}</h3>
-                        <p>{this.state.gameShowed.description}</p>
-                        <a className='btn btn-success' href={this.state.gameShowed.route}>Play!</a>
-                    </GameDetailPopUp>
+                    <GameDetailPopUp trigger={this.state.buttonPopUp} setTrigger={gameDetailTrigger} data={this.state.gameShowed}></GameDetailPopUp>
                 </Container>
             </div>
         )
