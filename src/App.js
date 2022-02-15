@@ -9,7 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 
 //Playing Game
 import PlayGame from './pages/PlayGame'
-
+// import Test from './pages/Test'
 // === Ini untuk percobaan connect form ke API ===
 import RegisterTest from './pages/RegisterTest'
 import FetchDataTest from './pages/FetchDataTest'
@@ -24,6 +24,7 @@ import Navbars from './pages/partials/Navbar'
 import { AuthProvider } from './auth/Auth'
 import PrivateRoute from './auth/PrivateRoute'
 
+
 function App() {
   return (
     <div>
@@ -37,6 +38,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/profile" component={ProfilePage} />
+            {/* <Route exact path="/test" component={Test} /> */}
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
