@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import './Navbar.css';
 import firebase from '../../auth/firebase'
 import { AuthContext } from "../../auth/Auth";
 
-import { Container, Collapse, Nav, Navbar,  NavbarBrand, NavbarToggler, NavItem, NavDropdown } from 'react-bootstrap';
+import { Container, Collapse, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 class Navbars extends Component {
     static contextType = AuthContext
     
     showLog(){
-        /* const userID = firebase.auth().currentUser.uid
-         firebase.database().ref(`profile/${userID}`).update({description: "Hi my name is Medhawi!"}) */
         const user = firebase.auth().currentUser;
 
         if(user != null){

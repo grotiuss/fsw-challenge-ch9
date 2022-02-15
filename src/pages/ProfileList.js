@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Col, Row, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import firebase from '../auth/firebase';
 
@@ -23,7 +23,6 @@ class ProfileList extends Component{
                 isLoading: false,
                 value: snapshot.val()
             })
-        const { value } = this.state;
         } catch (error) {
             console.log(error)
         }
