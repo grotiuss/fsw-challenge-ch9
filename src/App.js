@@ -11,7 +11,6 @@ import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
 import RegisterTest from './pages/RegisterTest'
 import FetchDataTest from './pages/FetchDataTest'
-import CardSliderTest from './pages/CardSliderTest'
 // ===============================================
 /**
  * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
@@ -41,7 +40,6 @@ function App() {
             <Route path="/navbar-test" component={Navbars} />
             <Route path="/register-test" component={RegisterTest} />
             <Route path="/fetch-test" component={FetchDataTest} />
-            <Route path="/card-test" component={CardSliderTest} />
             {/* ========================== */}
 
           </Switch>
