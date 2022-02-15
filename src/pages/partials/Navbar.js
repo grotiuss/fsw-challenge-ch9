@@ -17,7 +17,7 @@ class Navbars extends Component {
         if(user != null){
             return(
                 <>
-                    <Nav.Link className='text-success fw-bold'>{user.displayName}</Nav.Link>
+                    <Nav.Link className='text-success fw-bold' href='/profile'>{user.displayName}</Nav.Link>
                     <Nav.Link className='border-end me-1'></Nav.Link>
                     <Nav.Link onClick={() => firebase.auth().signOut()}>Sign Out</Nav.Link>
                 </>
@@ -42,8 +42,6 @@ class Navbars extends Component {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
-                        <Nav.Link href="/Profile">Pricing</Nav.Link>
                         <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

@@ -36,7 +36,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/Profile" element={<ProfilePage />} />
+            <Route exact path="/profile" component={ProfilePage} />
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
