@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+//Untuk router ProfilePage
+import ProfilePage from './pages/ProfilePage';
 
 //Playing Game
 import PlayGame from './pages/PlayGame'
@@ -34,11 +36,13 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/Profile" element={<ProfilePage />} />
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
             <Route path="/register-test" component={RegisterTest} />
             <Route path="/fetch-test" component={FetchDataTest} />
+
             {/* ========================== */}
 
           </Switch>
