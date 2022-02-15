@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md';
@@ -18,6 +18,20 @@ const CloseModalButton = styled(MdClose)`
   z-index: 10;
 `;
 
+function PlayButton(props) {
+    const url = props.url
+    if(url != '-') {
+        const ref = 'play/'+ url
+        return(
+            <a className='btn btn-warning' href={ref}> Play!</a>
+        )
+    } else  {
+        return(
+            <a className='btn btn-secondary' href='#'> Play!</a>
+        )
+    }
+}
+
 function GameDetailPopUp(props) {
     return (props.trigger) ? (
         <div className="popup">
@@ -30,11 +44,11 @@ function GameDetailPopUp(props) {
                             <Col className="col-12">
                                 <h3><b>{props.data.name}</b></h3>
                                 <p>{props.data.description}</p>
-                                <a className='btn btn-success' href={props.data.route}>Play!</a>
+                                <PlayButton url={props.data.route} />
                             </Col>
                             <Col className="col-12 mt-1 mt-xs-5 text-end pe-5">
                                 <h4><b>Leaderboard</b></h4>
-                                <CardSlider />
+                                <CardSlider url={props.data.route} />
                             </Col>
                         </Row>
                     </Col>
