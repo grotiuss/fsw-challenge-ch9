@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+//Untuk router ProfilePage
+import ProfilePage from './pages/ProfilePage';
+import ProfileList from './pages/ProfileList'
 
 //Playing Game
 import PlayGame from './pages/PlayGame'
-
 // === Ini untuk percobaan connect form ke API ===
 import RegisterTest from './pages/RegisterTest'
 import FetchDataTest from './pages/FetchDataTest'
@@ -32,14 +34,19 @@ function App() {
           <Switch>
 
             <PrivateRoute exact path="/play/rps" component={PlayGame} />
+            <PrivateRoute exact path="/profile" component={ProfilePage} />
+
+
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/profile-list" component={ProfileList} />
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
             <Route path="/register-test" component={RegisterTest} />
             <Route path="/fetch-test" component={FetchDataTest} />
+
             {/* ========================== */}
 
           </Switch>
