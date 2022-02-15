@@ -48,7 +48,11 @@ class ProfilePage extends Component{
     let userID = firebase.auth().currentUser
     let profileDB = firebase.database().ref(`profile/${userID.uid}`)
     event.preventDefault()
-    console.log(image)
+
+    console.log(description.length)
+    if(description.length > 200){
+      return alert('Your description has surpassed the maximum amount!')
+    }
     try {
       await profileDB.update(
             {
