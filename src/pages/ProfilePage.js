@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Col, Row, Container, Form, Button, Modal, } from 'react-bootstrap';
-// import {Card, ListGroup, ListGroupItem, Col, Row, Container, Form, Input} from 'reactstrap'
+
 import firebase from '../auth/firebase';
 
 
