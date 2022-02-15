@@ -88,10 +88,11 @@ class Home extends Component {
                 })
             }
         }
+
         const gameList = this.state.gameList
         
         return (
-            <div className='bg-black'>
+            <div className='body bg-black' >
                 <Container id='header' fluid>
                     <Container className='Container pt-5 pt-md-2 pt-lg-5'>
                         <Row className="justify-content-center mt-xxl-3">

@@ -3,6 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md';
 
+import CardSlider from './Components/CardSlider'
+
 import './GameDetailPopUp.css'
 
 const CloseModalButton = styled(MdClose)`
@@ -30,8 +32,9 @@ function GameDetailPopUp(props) {
                                 <p>{props.data.description}</p>
                                 <a className='btn btn-success' href={props.data.route}>Play!</a>
                             </Col>
-                            <Col className="col-12 mt-5 text-end pe-5">
+                            <Col className="col-12 mt-1 mt-xs-5 text-end pe-5">
                                 <h4><b>Leaderboard</b></h4>
+                                <CardSlider />
                             </Col>
                         </Row>
                     </Col>

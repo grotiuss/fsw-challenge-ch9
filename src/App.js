@@ -11,6 +11,7 @@ import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
 import RegisterTest from './pages/RegisterTest'
 import FetchDataTest from './pages/FetchDataTest'
+import CardSliderTest from './pages/CardSliderTest'
 // ===============================================
 /**
  * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
@@ -22,9 +23,10 @@ import Navbars from './pages/partials/Navbar'
 import { AuthProvider } from './auth/Auth'
 import PrivateRoute from './auth/PrivateRoute'
 
+
 function App() {
   return (
-    <div>
+    <body>
       <AuthProvider>
         <Navbars />
         <Router>
@@ -39,12 +41,13 @@ function App() {
             <Route path="/navbar-test" component={Navbars} />
             <Route path="/register-test" component={RegisterTest} />
             <Route path="/fetch-test" component={FetchDataTest} />
+            <Route path="/card-test" component={CardSliderTest} />
             {/* ========================== */}
 
           </Switch>
         </Router>
       </AuthProvider>
-    </div>
+    </body>
   )
 }
 
