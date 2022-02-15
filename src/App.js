@@ -27,7 +27,7 @@ import PrivateRoute from './auth/PrivateRoute'
 
 function App() {
   return (
-    <div>
+    <body>
       <AuthProvider>
         <Navbars />
         <Router>
@@ -52,7 +52,7 @@ function App() {
           </Switch>
         </Router>
       </AuthProvider>
-    </div>
+    </body>
   )
 }
 
