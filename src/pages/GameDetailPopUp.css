@@ -24,6 +24,7 @@
 
 .popup-inner .popup-content {
     padding: 32px;
+    height: 60vh;
 }
 
 .popup-inner .game-detail-img {
