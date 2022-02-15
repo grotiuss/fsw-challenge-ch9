@@ -52,6 +52,7 @@ class ProfilePage extends Component{
     try {
       await profileDB.update(
             {
+              username: username,
               description: description,
               imageLink: image
             }).then(userID.updateProfile({
@@ -88,7 +89,6 @@ class ProfilePage extends Component{
                 <img 
                 alt='Profile'
                 className='img-thumbnail'
-                // src="https://media.istockphoto.com/photos/handara-gate-bali-picture-id1137010913?k=20&amp;m=1137010913&amp;s=612x612&amp;w=0&amp;h=qeHQgAgKdRWJA_p_OmKq3GBKZMAuskkg-o7MJTR_Vzs=" 
                 src={this.state.image}
                 />
               </button>
