@@ -38,7 +38,10 @@ class ProfileList extends Component{
                         return (
                                 <Card style={{ width: '18rem' }} key={index} className='m-3'>
                                     <Card.Img variant="top" 
-                                     src={value[name].imageLink}/>
+                                    style={{width: '100%', height: '15vw', objectFit: 'contain'}}
+                                     src={value[name].imageLink}
+                                     className='rounded-3 img-thumbnail'
+                                     />
                                      <Card.Title>{value[name].name}</Card.Title>
                                     <Card.Body>
                                     <ListGroup className="list-group-flush">
