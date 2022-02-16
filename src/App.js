@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage';
 import ProfileList from './pages/ProfileList'
 
+import LandingPage from './pages/LandingPage'
+
 //Playing Game
 import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
@@ -41,6 +43,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/profile-list" component={ProfileList} />
+            <Route exact path="/landing" component={LandingPage} />
 
             {/* === Keperluan test API === */}
             <Route path="/navbar-test" component={Navbars} />
