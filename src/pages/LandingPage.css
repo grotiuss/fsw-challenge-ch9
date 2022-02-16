@@ -1,0 +1,31 @@
+.judul{
+    padding-top: 5em;
+    background-image:  linear-gradient(transparent 0.1em, black), url(../../public/assets/the-games-bg.jpg);
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.judul h1{
+    font-family: 'Bebas Neue', cursive;
+}
+
+.judul a{
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+.jelas{
+    padding-top: 5em;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-image: linear-gradient(transparent 0.1em, black), url(../../public/assets/requirements.png);
+}
+
+.image-rps{
+    width: 100%;
+    height: 100%;
+}
