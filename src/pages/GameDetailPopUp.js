@@ -34,7 +34,7 @@ function PlayButton(props) {
 
 function GameDetailPopUp(props) {
     return (props.trigger) ? (
-        <div key={props.key}>
+        
         <div className="popup">
             <div className="popup-inner">
                 <CloseModalButton className='close-btn' onClick={() => props.setTrigger(false)}></CloseModalButton>
@@ -56,8 +56,7 @@ function GameDetailPopUp(props) {
                 </Row>
             </div>
         </div>
-
-        </div>
+        
         
     ) : "";
 }
