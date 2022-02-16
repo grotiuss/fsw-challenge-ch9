@@ -9,7 +9,9 @@ import ProfilePage from './pages/ProfilePage';
 import ProfileList from './pages/ProfileList'
 
 import LandingPage from './pages/LandingPage'
+
 import ForgotPass from './pages/ForgotPass'
+
 //Playing Game
 import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
