@@ -34,11 +34,12 @@ function PlayButton(props) {
 
 function GameDetailPopUp(props) {
     return (props.trigger) ? (
+        
         <div className="popup">
             <div className="popup-inner">
                 <CloseModalButton className='close-btn' onClick={() => props.setTrigger(false)}></CloseModalButton>
                 <Row>
-                    <Col className='game-detail-img col-sm-5 col-md-5'></Col>
+                    <Col className='game-detail-img col-sm-5 col-md-5'style={{backgroundImage: `url(${props.data.imageFileName})`}}></Col>
                     <Col className="popup-content col-sm-7 col-md-7 col-12">
                         <Row>
                             <Col className="col-12">
@@ -55,6 +56,8 @@ function GameDetailPopUp(props) {
                 </Row>
             </div>
         </div>
+        
+        
     ) : "";
 }
 
