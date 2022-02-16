@@ -81,7 +81,8 @@ class Home extends Component {
                     gameShowed: {
                         name: item.name,
                         description: item.description,
-                        route: item.route
+                        route: item.route,
+                        imageFileName: item.imageFileName
                     }
                 })
             } else {
