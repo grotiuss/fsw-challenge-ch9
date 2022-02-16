@@ -23,7 +23,7 @@ class GameCard extends Component {
         // console.log(gameImage) //for location purposes and then put to database
         return (
             <>
-                <button className='text-center p-0' onClick={() => 
+                <button className='text-center p-0 border-0' onClick={() => 
                     setTrigger(true, item)
                 }>
                     <Image style={
@@ -31,7 +31,7 @@ class GameCard extends Component {
                             resize:'cover',
                             width: '100%',
                         }
-                    } src={item.imageFileName} />
+                    } src={item.imageFileName} className='img-thumbnail'/>
                 </button>
                 <span className='game-list-name'>{item.name}</span>
                 <br></br>
