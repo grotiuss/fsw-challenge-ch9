@@ -20,17 +20,19 @@ class GameCard extends Component {
     render() {
         const { item, setTrigger} = this.props
         const gameImage = require('./rock-paper-scissor.jpg')
+        // console.log(item.imageFileName)
+        // console.log(gameImage) //for location purposes and then put to database
         return (
             <>
-                <button className='text-center p-0' onClick={() => 
+                <button className='text-center p-0 border-0' onClick={() => 
                     setTrigger(true, item)
                 }>
                     <Image style={
                         {
                             resize:'cover',
-                            width: '100%'
+                            width: '100%',
                         }
-                    } src={gameImage} />
+                    } src={item.imageFileName} className='img-thumbnail'/>
                 </button>
                 <span className='game-list-name'>{item.name}</span>
                 <br></br>
