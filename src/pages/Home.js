@@ -30,10 +30,11 @@ class GameCard extends Component {
                     <Image style={
                         {
                             resize:'cover',
-                            width: '100%',
+                            height: '100%'
                         }
                     } src={item.imageFileName} className='img-thumbnail'/>
                 </button>
+                <br />
                 <span className='game-list-name'>{item.name}</span>
                 <br></br>
                 <span style={ { color: 'white', fontSize:'100%' } }>{item.description}</span>
