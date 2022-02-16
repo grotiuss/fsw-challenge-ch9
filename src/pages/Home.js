@@ -30,7 +30,8 @@ class GameCard extends Component {
                     <Image style={
                         {
                             resize:'cover',
-                            height: '100%'
+
+                            width: '100%',
                         }
                     } src={item.imageFileName} className='img-thumbnail'/>
                 </button>
