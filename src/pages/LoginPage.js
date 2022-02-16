@@ -30,7 +30,7 @@ class LoginPage extends Component{
 
        // Register via Firebase
        try {
-          const login = await firebase.auth().signInWithEmailAndPassword(email, password)
+          await firebase.auth().signInWithEmailAndPassword(email, password)
            history.push('/');
        } catch(error) {
            alert('Failed to Login')
@@ -78,7 +78,7 @@ class LoginPage extends Component{
               type="password"
             />
             </FormGroup>
-
+          <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
           <Button className='btn-success'>
             Login
           </Button>

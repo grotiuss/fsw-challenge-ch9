@@ -9,7 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 import ProfileList from './pages/ProfileList'
 
 import LandingPage from './pages/LandingPage'
-
+import ForgotPass from './pages/ForgotPass'
 //Playing Game
 import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
@@ -39,8 +39,10 @@ function App() {
             <PrivateRoute exact path="/profile" component={ProfilePage} />
 
 
+
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/forgot-password" component={ForgotPass} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/profile-list" component={ProfileList} />
             <Route exact path="/landing" component={LandingPage} />
