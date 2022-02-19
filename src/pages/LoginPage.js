@@ -76,7 +76,7 @@ export default class LoginPage extends React.Component {
                         <Label for="password">Password</Label>
                         <Input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} placeholder="Password" />
                     </FormGroup>
-                    <Input type='submit' value='sign in'>Sign In</Input>
+                    <Input type='submit' value='Sign In'>Sign In</Input>
                 </Form>
             </Col>
         </Row>
