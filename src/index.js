@@ -5,9 +5,11 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+const userToken = localStorage.getItem("token")
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App token = {userToken} />
   </React.StrictMode>,
   document.getElementById('root')
 )

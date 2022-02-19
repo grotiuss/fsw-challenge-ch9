@@ -8,20 +8,27 @@ import { Container, Collapse, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 class Navbars extends Component {
     static contextType = AuthContext
+    constructor(props) {
+        super(props)
+    }
+
+    signOut() {
+        localStorage.removeItem("token")
+        this.props.history.push('/')
+    }
     
     showLog(){
-        const user = firebase.auth().currentUser;
+        const user = localStorage.getItem('token');
 
         if(user != null){
             return(
                 <>
-                    <Nav.Link className='text-success fw-bold' href='/profile'>{user.displayName}</Nav.Link>
+                    <Nav.Link className='text-success fw-bold' href='/profile'>username</Nav.Link>
                     <Nav.Link className='border-end me-1'></Nav.Link>
-                    <Nav.Link onClick={() => firebase.auth().signOut()}>Sign Out</Nav.Link>
+                    <Nav.Link onClick={this.signOut} href="/">Sign Out</Nav.Link>
                 </>
             )
         }else{
-            console.log("User is not signed in!")
             return(
                 <>
                     <Nav.Link href="/login">Login</Nav.Link>

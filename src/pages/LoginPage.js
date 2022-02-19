@@ -21,7 +21,8 @@ export default class LoginPage extends React.Component {
       this.state = {
           username: '',
           password: '',
-          isLoading: false
+          isLoading: false,
+          sessionStorage : sessionStorage.getItem("username")
       }
 
       // this.username = this.username.bind(this)
@@ -48,6 +49,9 @@ export default class LoginPage extends React.Component {
           })
       }) .then((response) => response.json())
           .then((result) => {
+              if(result.data) {
+                localStorage.setItem("token", result.data.accessToken)
+              }
               alert(result.message)
               this.setState({
                 isLoading: false
@@ -94,7 +98,7 @@ export default class LoginPage extends React.Component {
   }
 
   render() {
-      console.log(this.state)
+      console.log(this.state.sessionStorage)
       return (
           <>
               {this.state.isLoading ? this.Loader : this.Content}
