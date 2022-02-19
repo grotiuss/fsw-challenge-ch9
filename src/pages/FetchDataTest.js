@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import { Container, Table } from 'reactstrap';
 import firebase from '../auth/firebase';
 
 class FetchDataTest extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: true
+            isLoading: true,
+            datas: null
         }
     }
 
@@ -14,31 +16,49 @@ class FetchDataTest extends Component {
     }
 
     async getData() {
-        try {
-            const snapshot = await firebase.database().ref('posts').once('value')
-            this.setState({
-                isLoading: false,
-                value: snapshot.val()
+        fetch("https://myfirst-api-101.herokuapp.com/test-db/accounts")
+            .then((res) => res.json())
+            .then((json) => {
+                this.setState({
+                    datas: json.data,
+                    isLoading: false,
+                })
             })
-        } catch (error) {
-            console.log(error)
-        }
     }
 
-    createParagraph = text => text.split("\n").map((i, index) =><p key={index}>{i}</p>)
     get Content(){
-        const { value } = this.state
-        const postIds = Object.keys(value)
-        const lastPostIds = postIds[postIds.length - 1]
-        const post = value[lastPostIds].text
-        console.log(value);
+        const datas = this.state.datas
+        let no = 0
         return (
-            <>
-                <h5>Last Post</h5>
-                <div className='post'>
-                    {this.createParagraph(post)}
-                </div>
-            </>
+            <Container>
+                <Table>
+                    <thead>
+                        <tr className='text-center'>
+                            <th>#</th>
+                            <th>username</th>
+                            <th>asAdmin</th>
+                            <th>createdAt</th>
+                            <th>updatedAt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {datas.map((data, index) => {
+                            var role = 'user'
+                            if(data.asAdmin)
+                                role = 'admin'
+                            return(
+                                <tr key={index}>
+                                    <th>{++no}</th>
+                                    <td>{data.username}</td>
+                                    <td>{role}</td>
+                                    <td>{data.createdAt}</td>
+                                    <td>{data.updatedAt}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </Container>
         )
     }
 
@@ -50,6 +70,7 @@ class FetchDataTest extends Component {
         return(
             <div>
                 {this.state.isLoading ? this.Loader : this.Content}
+                {/* {this.Loader} */}
             </div>
         )
     }

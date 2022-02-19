@@ -15,8 +15,8 @@ import ForgotPass from './pages/ForgotPass'
 //Playing Game
 import PlayGame from './pages/PlayGame'
 // === Ini untuk percobaan connect form ke API ===
-import RegisterTest from './pages/RegisterTest'
-import FetchDataTest from './pages/FetchDataTest'
+  import RegisterTest from './pages/RegisterTest'
+  import FetchDataTest from './pages/FetchDataTest'
 // ===============================================
 /**
  * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
@@ -50,10 +50,9 @@ function App() {
             <Route exact path="/landing" component={LandingPage} />
 
             {/* === Keperluan test API === */}
-            <Route path="/navbar-test" component={Navbars} />
-            <Route path="/register-test" component={RegisterTest} />
-            <Route path="/fetch-test" component={FetchDataTest} />
-
+              <Route path="/navbar-test" component={Navbars} />
+              <Route path="/register-test" component={RegisterTest} />
+              <Route path="/fetch-test" component={FetchDataTest} />
             {/* ========================== */}
 
           </Switch>
