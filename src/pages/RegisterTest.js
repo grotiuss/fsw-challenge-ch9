@@ -26,25 +26,26 @@ export default class RegisterTest extends React.Component {
     }
 
     register = (e) => {
-        fetch('http://localhost:5000/user/register', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password
-            })
-        }) .then((response) => response.json())
-            .then((result) => {
-                if(result.result == 'SUCCESS'){
-                    alert(result.message)
-                    this.props.history.push('/')
-                }
-                else
-                    alert('There was a problem when creating account')
-            })
+        // fetch('http://localhost:5000/user/register', {
+        //     method: 'post',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         username: this.state.username,
+        //         password: this.state.password
+        //     })
+        // }) .then((response) => response.json())
+        //     .then((result) => {
+        //         if(result.result == 'SUCCESS'){
+        //             alert(result.message)
+        //             this.props.history.push('/')
+        //         }
+        //         else
+        //             alert('There was a problem when creating account')
+        //     })
+        console.log('Clicked')
     }
 
 
@@ -53,7 +54,6 @@ export default class RegisterTest extends React.Component {
         console.log(this.state)
         return (
             <>
-                <Navbar />
                 <Container id='registerForm' className='mt-5'>
                     <Row className="justify-content-center">
                         <Col xs='5' className='text-center'>

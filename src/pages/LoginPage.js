@@ -1,93 +1,104 @@
-import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import { Redirect } from 'react-router-dom'
+import React from 'react';
+import { Button, Form, FormGroup, Label, Input, FormText, Row, Col} from 'reactstrap';
+import { Container } from 'react-bootstrap';
+import './LoginPage.css'
 
-import { Form, FormGroup, Label, Input, Container, Col} from 'reactstrap';
-import firebase from '../auth/firebase';
-import { AuthContext } from "../auth/Auth";
+import LoadingAnimation from './Components/LoadingAnimation_1'
 
-
-class LoginPage extends Component{
-  static contextType = AuthContext; 
-  constructor(props){
-      super(props);
-
-      this.state ={};
-  }
-
-  set = name => event => {
-      // console.log(event.target.value)  
-      this.setState({[name]: event.target.value});
-  }
-
-  handleSubmit = async(event) => {
-      const { email, password}  = this.state;
-      const { history } = this.props
-      event.preventDefault();
-
-       // Validasi
-       if(!email || !password) return alert('Please insert missing credentials!')
-
-       // Register via Firebase
-       try {
-          await firebase.auth().signInWithEmailAndPassword(email, password)
-           history.push('/');
-       } catch(error) {
-           alert('Failed to Login')
-           console.log(error)
-       }
-  }
-
-  render(){
-      const { currentUser } = this.context
-      if (!!currentUser) return <Redirect to="/" />
-      return(
-        <>
-        <Col xs={8} sm={12} md={12} className="text-center pt-sm-5 pt-xl-5">
-            <h1>LOGIN</h1>                       
-        </Col>
-        <Container>
-        <Form inline onSubmit={this.handleSubmit}>
-          
-          <FormGroup>
-            <Label
-              for="exampleEmail"
-              hidden
-            >
-              Your Email
-            </Label>
-            <Input
-              id="exampleEmail"
-              name="email"
-              placeholder="Your Email"
-              type="email"
-              onChange={this.set('email')}
-            />
-          </FormGroup>
-          {' '}
-          <FormGroup>
-            <Label
-              hidden
-            >
-              Your Password
-            </Label>
-            <Input
-              name="password"
-              placeholder="Your Password"
-              onChange={this.set('password')}
-              type="password"
-            />
-            </FormGroup>
-          <a href='/forgot-password'>Forgot your password? Click me!</a><br/>
-          <Button className='btn-success'>
-            Login
-          </Button>
-        </Form>
-        </Container>
-  
-      </>
-      )
+class LoadingLayer extends React.Component {
+  render() {
+    return(
+      <div  className='dark-layer'>
+        <LoadingAnimation />
+      </div>
+    )
   }
 }
 
-export default LoginPage; 
+export default class LoginPage extends React.Component {
+  constructor() {
+      super();
+      this.state = {
+          username: '',
+          password: '',
+          isLoading: false
+      }
+
+      // this.username = this.username.bind(this)
+      // this.password = this.password.bind(this)
+  }
+
+  setLoading = () => {
+    this.setState({
+      isLoading: true
+    })
+  }
+
+  signIn = (e) => {
+      this.setLoading()
+      fetch('https://myfirst-api-101.herokuapp.com/login', {
+          method: 'post',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              username: this.state.username,
+              password: this.state.password
+          })
+      }) .then((response) => response.json())
+          .then((result) => {
+              alert(result.message)
+              this.setState({
+                isLoading: false
+              })
+          })
+      e.preventDefault()
+      // console.log('Clicked')
+  }
+
+  get Content () {
+    return (
+      <Container id='registerForm' className='mt-5'>
+        <Row className="justify-content-center">
+            <Col xs='5' className='text-center'>
+                <h2>Login</h2>
+            </Col>
+        </Row>
+        <Row className="justify-content-center">
+            <Col xs='8' className='mt-5'>
+                <Form  onSubmit={this.signIn}>
+                    <FormGroup>
+                        <Label for="username">Username</Label>
+                        <Input type="text" name="username" id="username" onChange={(e) => { this.setState({ username: e.target.value }) }} placeholder="Username" />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} placeholder="Password" />
+                    </FormGroup>
+                    <Input type='submit' value='sign in'>Sign In</Input>
+                </Form>
+            </Col>
+        </Row>
+      </Container>
+    )
+  }
+
+  get Loader () {
+    return (
+      <>
+        <LoadingLayer />
+        {this.Content}
+      </>
+    )
+  }
+
+  render() {
+      console.log(this.state)
+      return (
+          <>
+              {this.state.isLoading ? this.Loader : this.Content}
+          </>
+      );
+  }
+}
