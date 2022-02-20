@@ -50,13 +50,14 @@ export default class LoginPage extends React.Component {
           })
       }) .then((response) => response.json())
           .then((result) => {
-              if(result.data) {
-                localStorage.setItem("token", result.data.accessToken)
-              }
-              alert(result.message)
-              this.setState({
-                isLoading: false
-              })
+            alert(result.message)
+            this.setState({
+              isLoading: false
+            })
+            if(result.data) {
+              localStorage.setItem("token", result.data.accessToken)
+            }
+
           })
       e.preventDefault()
       // console.log('Clicked')

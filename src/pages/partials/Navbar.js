@@ -37,8 +37,6 @@ class Navbars extends Component {
         })
     }
 
-
-
     signOut() {
         localStorage.removeItem("token")
         this.props.history.push('/')
@@ -63,6 +61,7 @@ class Navbars extends Component {
         }
         
     }
+    
     render() {
         return (
             <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
