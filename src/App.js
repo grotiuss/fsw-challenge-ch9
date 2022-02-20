@@ -18,57 +18,93 @@ import PlayGame from './pages/PlayGame'
 import RegisterTest from './pages/RegisterTest'
 import FetchDataTest from './pages/FetchDataTest'
 // ===============================================
+
 /**
  * Untuk halaman Register dan Login-nya silahkan dibuat baru lagi saja.
  * Format file nya harap mengikuti yang sudah ada ya :D
  */
 
 import Navbars from './pages/partials/Navbar'
+import LoadingAnimation from './pages/Components/LoadingAnimation_1'
 
 import { AuthProvider } from './auth/Auth'
 import PrivateRoute from './auth/PrivateRoute'
 
+// const userToken = localStorage.getItem("token")
+
+class LoadingLayer extends React.Component {
+  render() {
+    return(
+      <div  className='dark-layer'>
+        <LoadingAnimation />
+      </div>
+    )
+  }
+}
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: null,
-      username: null,
-      asAdmin: false
+      userSession: {
+        id: null,
+        username: null,
+        asAdmin: false,
+      },
+      userToken: localStorage.token,
+      isLoading: true
     }
   }
 
   componentDidMount() {
-    if(this.props.token)
-      this.getUserSession()
+    const userToken = this.state.userToken
+    this.getUserSession(userToken)
   }
 
-  getUserSession = () => {
-    const opts = {
-      method: "POST",
-      headers: {
-        "Authorization": this.props.token,
-        "Content-Type": "application/json"
+  getUserSession = async(userToken = null) => {
+    if(userToken) {
+      const opts = {
+        method: "POST",
+        headers: {
+          "Authorization": userToken,
+          "Content-Type": "application/json"
+        }
       }
-    }
-    fetch("https://myfirst-api-101.herokuapp.com/login/jwt-test", opts)
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({
-          id: result.id,
-          username: result.username,
-          asAdmin: result.asAdmin
+      fetch("https://myfirst-api-101.herokuapp.com/login/jwt-test", opts)
+        .then((response) => response.json())
+        .then((result) => {
+          this.setState({
+            userSession : {
+              id: result.id,
+              username: result.username,
+              asAdmin: result.asAdmin
+            },
+            isLoading: false
+          })
         })
+    } else {
+      this.setState({
+        isLoading: false
       })
+    }
   }
 
-  render() {
-    const currentUser = this.state
+  get Loader () {
     return (
-      <body>
+      <>
+        <LoadingLayer />
+      </>
+    )
+  }
+
+  get Content () {
+    const currentUser = this.state.userSession
+    console.log('username (app): ' + this.state.userSession.username)
+    console.log('token (app): ' + this.state.userToken)
+    return (
+      <>
         <AuthProvider>
-          <Navbars user={currentUser} />
+          <Navbars userSession={currentUser} />
           <Router>
             <Switch>
 
@@ -91,44 +127,17 @@ class App extends React.Component {
             </Switch>
           </Router>
         </AuthProvider>
+      </>
+    )
+  }
+
+  render() {
+    return(
+      <body>
+        {this.state.isLoading ? this.Loader : this.Content}
       </body>
     )
   }
 }
-
-// function App(props) {
-//   console.log('token: ' + props.token)
-//   return (
-//     <body>
-//       <AuthProvider>
-//         <Navbars />
-//         <Router>
-//           <Switch>
-
-//             <PrivateRoute exact path="/play/rps" component={PlayGame} />
-//             <PrivateRoute exact path="/profile" component={ProfilePage} />
-
-
-
-//             <Route exact path="/" component={Home} />
-//             <Route exact path="/login" component={LoginPage} />
-//             <Route exact path="/forgot-password" component={ForgotPass} />
-//             <Route exact path="/register" component={RegisterPage} />
-//             <Route exact path="/profile-list" component={ProfileList} />
-//             <Route exact path="/landing" component={LandingPage} />
-
-//             {/* === Keperluan test API === */}
-//             <Route path="/navbar-test" component={Navbars} />
-//             <Route path="/register-test" component={RegisterTest} />
-//             <Route path="/fetch-test" component={FetchDataTest} />
-
-//             {/* ========================== */}
-
-//           </Switch>
-//         </Router>
-//       </AuthProvider>
-//     </body>
-//   )
-// }
 
 export default App

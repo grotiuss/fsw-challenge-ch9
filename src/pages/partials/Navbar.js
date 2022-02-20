@@ -6,11 +6,38 @@ import { AuthContext } from "../../auth/Auth";
 
 import { Container, Collapse, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
+import LoadingAnimation from '../Components/LoadingAnimation_1'
+
 class Navbars extends Component {
     static contextType = AuthContext
     constructor(props) {
         super(props)
+        this.state = {
+            data: {
+                id: null,
+                username: null,
+                asAdmin: false
+            },
+            isLoading: true
+        }
     }
+
+    componentDidMount() {
+        this.getUserData()
+    }
+
+    getUserData(){
+        this.setState({
+            data: {
+                id: this.props.userSession.id,
+                username: this.props.userSession.username,
+                asAdmin: this.props.userSession.asAdmin
+            },
+            isLoading: true
+        })
+    }
+
+
 
     signOut() {
         localStorage.removeItem("token")
@@ -18,12 +45,10 @@ class Navbars extends Component {
     }
     
     showLog(){
-        const user = localStorage.getItem('token');
-
-        if(user != null){
+        if(this.state.data.username){
             return(
                 <>
-                    <Nav.Link className='text-success fw-bold' href='/profile'>username</Nav.Link>
+                    <Nav.Link className='text-success fw-bold' href='/profile'>{this.state.data.username}</Nav.Link>
                     <Nav.Link className='border-end me-1'></Nav.Link>
                     <Nav.Link onClick={this.signOut} href="/">Sign Out</Nav.Link>
                 </>

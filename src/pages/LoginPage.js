@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, FormText, Row, Col} from 'reactstrap';
+import { Redirect } from 'react-router-dom'
 import { Container } from 'react-bootstrap';
 import './LoginPage.css'
 
@@ -61,7 +62,15 @@ export default class LoginPage extends React.Component {
       // console.log('Clicked')
   }
 
-  get Content () {
+  get Redirect () {
+    return(
+      <>
+        <Redirect push to="./" />
+      </>
+    )
+  }
+
+  get Form () {
     return (
       <Container id='registerForm' className='mt-5'>
         <Row className="justify-content-center">
@@ -88,6 +97,15 @@ export default class LoginPage extends React.Component {
     )
   }
 
+  get Content () {
+    const userToken = localStorage.getItem("token")
+    return(
+      <>
+        { userToken ? this.Redirect : this.Form }
+      </>
+    )
+  }
+
   get Loader () {
     return (
       <>
@@ -98,7 +116,7 @@ export default class LoginPage extends React.Component {
   }
 
   render() {
-      console.log(this.state.sessionStorage)
+      // console.log(this.state.sessionStorage)
       return (
           <>
               {this.state.isLoading ? this.Loader : this.Content}

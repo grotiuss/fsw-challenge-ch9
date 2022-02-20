@@ -67,7 +67,7 @@ class Home extends Component {
                 gameList: Object.values(snapshot.val())
             })
 
-            console.log(this.state.gameList)
+            // console.log(this.state.gameList)
         } catch (error) {
             console.log(error)
         }
