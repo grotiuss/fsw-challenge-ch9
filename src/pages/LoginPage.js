@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, FormText, Row, Col} from 'reactstrap';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory, Switch } from 'react-router-dom'
 import { Container } from 'react-bootstrap';
 import './LoginPage.css'
 
@@ -37,6 +37,7 @@ export default class LoginPage extends React.Component {
   }
 
   signIn = (e) => {
+      // const history = useHistory()
       this.setLoading()
       fetch('https://myfirst-api-101.herokuapp.com/login', {
           method: 'post',
@@ -56,8 +57,8 @@ export default class LoginPage extends React.Component {
             })
             if(result.data) {
               localStorage.setItem("token", result.data.accessToken)
+              // history.push("/")
             }
-
           })
       e.preventDefault()
       // console.log('Clicked')
@@ -66,7 +67,9 @@ export default class LoginPage extends React.Component {
   get Redirect () {
     return(
       <>
-        <Redirect push to="./" />
+        <Switch>
+          <Redirect push to="/" />
+        </Switch>
       </>
     )
   }
